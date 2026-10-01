@@ -197,6 +197,14 @@ export const SITE_CONFIG: SiteConfig = {
   ],
   gallery: [
     {
+      id: "official-16x9-thumbnail",
+      title: "Official 16:9 Roblox Game Thumbnail",
+      category: "gameplay",
+      imageUrl: asset("/assets/images/thumbnail_roblox_16x9.jpg"),
+      caption:
+        "Cinematic 16:9 promotional banner featuring the colossal glowing Golden Egg, companion eggs with orbital rings, floating coins, and sky islands.",
+    },
+    {
       id: "official-game-cover",
       title: "Official Egg Incremental Art",
       category: "gameplay",
