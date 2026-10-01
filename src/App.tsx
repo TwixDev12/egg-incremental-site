@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { ThreeDShowcaseSection } from './components/ThreeDShowcaseSection';
 import { CountdownSection } from './components/CountdownSection';
 import { GameplaySection } from './components/GameplaySection';
 import { GallerySection } from './components/GallerySection';
@@ -46,6 +47,9 @@ export const App: React.FC = () => {
       <main>
         {/* A & B. Hero Section */}
         <Hero remainingTimeText={remainingText} />
+
+        {/* 3D WebGL Cosmic Arena (Interactive Three.js 3D Egg) */}
+        <ThreeDShowcaseSection />
 
         {/* E. 10-Day Central Countdown Section */}
         <CountdownSection />

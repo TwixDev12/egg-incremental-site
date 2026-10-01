@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { trackPlayNowClick } from '../utils/analytics';
-import { Play, ChevronDown, Sparkles, Trophy, Users, ShieldCheck, Flame } from 'lucide-react';
+import { Play, ChevronDown, Sparkles, Trophy, Users, ShieldCheck, Flame, Box } from 'lucide-react';
 import { asset } from '../utils/assets';
 
 interface HeroProps {
@@ -9,6 +9,8 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ remainingTimeText = '10 Days Event Live' }) => {
+  const [viewMode, setViewMode] = useState<'3d-render' | 'live-game'>('3d-render');
+
   const handlePlayNow = () => {
     trackPlayNowClick('hero_cta');
     window.open(SITE_CONFIG.game.playUrl, '_blank', 'noopener,noreferrer');
@@ -124,12 +126,41 @@ export const Hero: React.FC<HeroProps> = ({ remainingTimeText = '10 Days Event L
             <div className="relative w-full max-w-md sm:max-w-lg p-2.5 sm:p-3 rounded-[2.5rem] bg-gradient-to-b from-purple-500/20 via-white/5 to-amber-500/20 border border-white/15 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] group">
               {/* Inner Core Container */}
               <div className="relative rounded-[2rem] overflow-hidden bg-[#0c091d] border border-white/10 aspect-4/3 flex items-center justify-center">
-                {/* Authentic in-game capture */}
+                {/* Dynamic Image View */}
                 <img
-                  src={asset('/assets/images/capture_guardians_chest.png')}
-                  alt="In-Game Guardians and Bitcoin Chest in Egg Incremental Simulator"
+                  src={
+                    viewMode === '3d-render'
+                      ? asset('/assets/images/thumbnail_roblox_16x9.jpg')
+                      : asset('/assets/images/capture_guardians_chest.png')
+                  }
+                  alt="Egg Incremental Simulator Showcase"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
                 />
+
+                {/* View Switcher Controls (Top Left) */}
+                <div className="absolute top-3 left-3 flex items-center gap-1 p-1 rounded-full bg-black/75 border border-white/20 backdrop-blur-md z-10 shadow-lg">
+                  <button
+                    onClick={() => setViewMode('3d-render')}
+                    className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                      viewMode === '3d-render'
+                        ? 'bg-amber-400 text-slate-950 shadow-sm'
+                        : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    <Box className="w-3 h-3" />
+                    <span>3D Render</span>
+                  </button>
+                  <button
+                    onClick={() => setViewMode('live-game')}
+                    className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                      viewMode === 'live-game'
+                        ? 'bg-amber-400 text-slate-950 shadow-sm'
+                        : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    Live Game
+                  </button>
+                </div>
 
                 {/* Subtle vignette gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0718] via-transparent to-black/30 pointer-events-none" />
@@ -145,8 +176,12 @@ export const Hero: React.FC<HeroProps> = ({ remainingTimeText = '10 Days Event L
                       />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-white">The Bitcoin Guardian Chest</h4>
-                      <p className="text-[10px] text-amber-300/90 font-medium">Real in-game experience</p>
+                      <h4 className="text-xs font-black text-white">
+                        {viewMode === '3d-render' ? 'Official 3D Game Miniature' : 'The Bitcoin Guardian Chest'}
+                      </h4>
+                      <p className="text-[10px] text-amber-300/90 font-medium">
+                        {viewMode === '3d-render' ? 'Cinematic 16:9 Showcase' : 'Real in-game experience'}
+                      </p>
                     </div>
                   </div>
                   <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">

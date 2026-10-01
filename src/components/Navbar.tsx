@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { trackPlayNowClick } from '../utils/analytics';
-import { ExternalLink, Menu, X, Sparkles, Gamepad2, Clock, Image as ImageIcon, Flame } from 'lucide-react';
+import { ExternalLink, Menu, X, Sparkles, Clock, Image as ImageIcon, Flame, Box } from 'lucide-react';
 import { asset } from '../utils/assets';
 
 export const Navbar: React.FC = () => {
@@ -23,8 +23,8 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Overview', href: '#hero', icon: Sparkles },
+    { name: '3D Arena', href: '#3d-arena', icon: Box },
     { name: 'Features', href: '#features', icon: Flame },
-    { name: 'Demo Clicker', href: '#demo-clicker', icon: Gamepad2 },
     { name: 'Countdown', href: '#countdown', icon: Clock },
     { name: 'Gallery', href: '#gallery', icon: ImageIcon },
   ];
